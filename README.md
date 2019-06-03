@@ -1,5 +1,7 @@
 # The Awesome Newspage
 
+# Jonas 
+
 ## Installation
 
 Klon repository til din computer, og åben mappen i VSCode.
