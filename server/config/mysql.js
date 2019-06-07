@@ -5,9 +5,9 @@ module.exports = {
       return mysql.createConnection({
          host: 'localhost',
          user: 'root',
-         password: 'root',
+         password: ' ',
          port: '3306',
-         database: 'the_awesome_newpage'
+         database: 'news-website' // Name of database
       })
    }
 }

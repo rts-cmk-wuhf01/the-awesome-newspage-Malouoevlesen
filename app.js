@@ -40,3 +40,8 @@ app.listen(port, (error) => {
    console.log('\x1b[35m%s\x1b[0m', '================================================================'); // udskriver en lilla streg i konsol
    console.log('Server is listening on port %s, address: %s', port, 'http://localhost:' + port);
 });
+
+
+// Date and time modul.
+
+app.locals.dateAndTime = require('date-and-time');
