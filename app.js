@@ -45,3 +45,4 @@ app.listen(port, (error) => {
 // Date and time modul.
 
 app.locals.dateAndTime = require('date-and-time');
+app.locals.dateAndTime.locale('dk');

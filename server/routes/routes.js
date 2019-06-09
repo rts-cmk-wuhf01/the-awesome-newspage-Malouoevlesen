@@ -9,4 +9,12 @@ module.exports = (app) => {
       db.end (); // Disconnects from database.
    });
 
+   app.get('/about', async (req, res, next) => {
+      res.render('about');
+   });
+
+   app.get('/catagories', async (req, res, next) => {
+      res.render('catagories');
+   });
+
 };
