@@ -9,12 +9,25 @@ module.exports = (app) => {
       db.end (); // Disconnects from database.
    });
 
-   app.get('/about', async (req, res, next) => {
+   app.get('/about', (req, res, next) => {
       res.render('about');
    });
 
-   app.get('/catagories', async (req, res, next) => {
-      res.render('catagories');
+   app.get('/contact', (req, res, next) => {
+      res.render('contact');
+   });
+
+   app.get('/categories-post', (req, res, next) => {
+      let dateForPost = new Date('2019-04-14 07:00:14');
+      let dateForOtherPost = new Date('2019-04-14 11:00:14');
+      res.render('categories-post', { date: dateForPost, dateOther: dateForOtherPost }, function (err, html) {
+         res.send(html)
+      })
+
+   });
+
+   app.get('/single-post', (req, res, next) => {
+      res.render('single-post');
    });
 
 };

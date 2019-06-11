@@ -1,33 +1,37 @@
-<%- include('partials/head.ejs') %> 
-<!-- Head meta data link -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>The News Paper - News &amp; Lifestyle Magazine Template</title>
+
+    <!-- Favicon -->
+   <%- include("partials/favicon") %>
+
+    <!-- Core Stylesheet -->
+   <%- include("partials/styles") %>
+
+</head>
 
 <body>
     <!-- ##### Header Area Start ##### -->
-    <%- include('partials/topheader.ejs') %> 
+    <header class="header-area">
+
+      <%- include("partials/header") %>
+    </header>
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Hero Area Start ##### -->
     <div class="hero-area">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12 col-lg-8">
-
-                    <!-- Breaking News Widget -->
-
-                    <%- include('partials/breaking-news-widget.ejs') %> 
-
-
-                <!-- Hero Add -->
-                <div class="col-12 col-lg-4">
-                    <div class="hero-add">
-                        <a href="#"><img src="img/bg-img/hero-add.gif" alt=""></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <%- include("partials/hero-area") %>
     </div>
-	<!-- ##### Hero Area End ##### -->
-
+    <!-- ##### Hero Area End ##### -->
 
     <!-- ##### About Area Start ##### -->
     <section class="about-area">
@@ -97,31 +101,25 @@
             </div>
         </div>
     </section>
-	<!-- ##### About Area End ##### -->
-	
-	 <!-- ##### Team Area Start ##### -->
-	 <section class="newspaper-team mb-30">
-        <div class="container">
-            <div class="row">
+    <!-- ##### About Area End ##### -->
 
-				<%- include('partials/single-team-member.ejs', {image: 'img/bg-img/t1.jpg', name: "James Williams", title: "Senior Editor"}) %>
-				<%- include('partials/single-team-member.ejs', {image: 'img/bg-img/t2.jpg', name: "Christinne Smith", title: "Senior Editor"}) %>
-				<%- include('partials/single-team-member.ejs', {image: 'img/bg-img/t3.jpg', name: "Alicia Dormund", title: "Senior Editor"}) %>
-				<%- include('partials/single-team-member.ejs', {image: 'img/bg-img/t4.jpg', name: "Steve Duncan", title: "Senior Editor"}) %>
-				<%- include('partials/single-team-member.ejs', {image: 'img/bg-img/t5.jpg', name: "James Williams", title: "Senior Editor"}) %>
-				<%- include('partials/single-team-member.ejs', {image: 'img/bg-img/t6.jpg', name: "Christinne Smith", title: "Senior Editor"}) %>
-				<%- include('partials/single-team-member.ejs', {image: 'img/bg-img/t7.jpg', name: "Alicia Dormund", title: "Senior Editor"}) %>
-				<%- include('partials/single-team-member.ejs', {image: 'img/bg-img/t8.jpg', name: "Steve Duncan", title: "Senior Editor"}) %>
-
-
-            </div>
-        </div>
+    <!-- ##### Team Area Start ##### -->
+    <section class="newspaper-team mb-30">
+        <%- include("partials/newspaperteam") %>
     </section>
     <!-- ##### Team Area End ##### -->
-	
-	   <!-- Footer link -->
-	   <%- include('partials/footer.ejs') %> 
 
-	</body>
-	
-	</html>
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+
+        <!-- Main Footer Area -->
+      <%- include("partials/footer") %>
+    </footer>
+    <!-- ##### Footer Area Start ##### -->
+
+    <!-- ##### All Javascript Files ##### -->
+    <!-- jQuery-2.2.4 js -->
+<%- include("partials/scripts") %>
+</body>
+
+</html>
