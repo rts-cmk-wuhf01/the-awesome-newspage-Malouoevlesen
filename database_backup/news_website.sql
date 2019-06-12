@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 09, 2019 at 10:12 AM
+-- Generation Time: Jun 12, 2019 at 10:46 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -35,15 +35,20 @@ CREATE TABLE `articles` (
   `text` varchar(3000) NOT NULL,
   `date` date NOT NULL,
   `images_fk` int(11) NOT NULL,
-  `category_fk` int(11) NOT NULL
+  `category_fk` int(11) NOT NULL,
+  `comments_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `articles`
 --
 
-INSERT INTO `articles` (`id`, `title`, `authors_fk`, `text`, `date`, `images_fk`, `category_fk`) VALUES
-(1, 'Russian Invades Denmark', 1, 'Lorem Ipsum.', '2019-06-07', 1, 1);
+INSERT INTO `articles` (`id`, `title`, `authors_fk`, `text`, `date`, `images_fk`, `category_fk`, `comments_fk`) VALUES
+(2, 'KFC runs out of chicken!', 2, 'No more chicken. UK in serious problems.', '2019-06-10', 2, 7, 1),
+(3, 'Campaign costs more than 2 mil', 4, 'The brexit campaign is estimated to now cost more than 2 million pounds so far.', '2019-06-06', 5, 4, 4),
+(6, 'Russia invades Denmark', 2, 'After the new Chernobly disaster, the russians have now decided to invade Denmark.', '2019-06-12', 3, 5, 1),
+(7, 'Kasper Schmeichel changes club', 2, 'Danish football player has decided to relocate his job and change to a different club. ', '2019-06-06', 1, 1, 3),
+(8, 'Brexit: Government spends £97m', 4, 'According to the Cabinet Office, £65m had been earmarked for consultancy services between April 2018 and April 2019.', '2019-06-10', 5, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -63,7 +68,10 @@ CREATE TABLE `authors` (
 --
 
 INSERT INTO `authors` (`id`, `name`, `job/position`, `avatar_fk`) VALUES
-(1, 'Torben', 'Author', 1);
+(1, 'Torben', 'Author', 1),
+(2, 'Andre Acimann', 'Journalist', 1),
+(3, 'Armie Hammer', 'Journalist', 1),
+(4, 'Timothée Chalamet', 'Journalist', 1);
 
 -- --------------------------------------------------------
 
@@ -81,7 +89,11 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `title`) VALUES
-(1, 'Sport');
+(1, 'Sport'),
+(2, 'Finance'),
+(4, 'Politics'),
+(5, 'Travel'),
+(7, 'Breaking News');
 
 -- --------------------------------------------------------
 
@@ -101,7 +113,10 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `user_fk`, `text`, `date`) VALUES
-(1, 1, 'oawhidoawdhawodhoawhdoawhdo', '2019-06-20');
+(1, 1, 'oawhidoawdhawodhoawhdoawhdo', '2019-06-20'),
+(2, 1, 'Good work man. ', '2019-06-12'),
+(3, 4, 'Smelly cat, smelly cat... something.', '2019-06-09'),
+(4, 3, 'Do you guys have any cake?', '2019-06-02');
 
 -- --------------------------------------------------------
 
@@ -119,7 +134,11 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `src`) VALUES
-(1, '1.jpg');
+(1, '1.jpg'),
+(2, '32.jpg'),
+(3, '30.jpg'),
+(4, '31.jpg'),
+(5, '29.jpg');
 
 -- --------------------------------------------------------
 
@@ -141,7 +160,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `age`, `email`, `avatar_fk`, `password`) VALUES
-(1, 'Anders', 17, 'anders@gmail.com', 1, '123');
+(1, 'Anders', 17, 'anders@gmail.com', 1, '123'),
+(2, 'Lars', 25, 'lars.larsen@gamil.com', 3, 'dagfcugwefH'),
+(3, 'Jonas', 26, 'jojo@gmail.com', 2, 'myfirstcat'),
+(4, 'Phoebe', 45, 'learnguitar@gmail.com', 4, 'smellycat');
 
 --
 -- Indexes for dumped tables
@@ -154,7 +176,8 @@ ALTER TABLE `articles`
   ADD PRIMARY KEY (`id`),
   ADD KEY `authors_fk` (`authors_fk`),
   ADD KEY `images_fk` (`images_fk`),
-  ADD KEY `category_fk` (`category_fk`);
+  ADD KEY `category_fk` (`category_fk`),
+  ADD KEY `comments_fk` (`comments_fk`);
 
 --
 -- Indexes for table `authors`
@@ -197,37 +220,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -239,7 +262,8 @@ ALTER TABLE `users`
 ALTER TABLE `articles`
   ADD CONSTRAINT `articles_ibfk_1` FOREIGN KEY (`category_fk`) REFERENCES `categories` (`id`),
   ADD CONSTRAINT `articles_ibfk_2` FOREIGN KEY (`authors_fk`) REFERENCES `authors` (`id`),
-  ADD CONSTRAINT `articles_ibfk_3` FOREIGN KEY (`images_fk`) REFERENCES `images` (`id`);
+  ADD CONSTRAINT `articles_ibfk_3` FOREIGN KEY (`images_fk`) REFERENCES `images` (`id`),
+  ADD CONSTRAINT `articles_ibfk_4` FOREIGN KEY (`comments_fk`) REFERENCES `comments` (`id`);
 
 --
 -- Constraints for table `authors`
