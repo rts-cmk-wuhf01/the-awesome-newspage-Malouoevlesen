@@ -1,4 +1,5 @@
-const mysql = require('mysql2'); // mysql
+const mysql = require('mysql2/promise'); // mysql
+//
 
 module.exports = {
    connect: function () {

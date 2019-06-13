@@ -6,7 +6,7 @@
                 <div class="top-header-content d-flex align-items-center justify-content-between">
                     <!-- Logo -->
                     <div class="logo">
-                        <a href="/"><img src="img/core-img/logo.png" alt=""></a>
+                        <a href="/"><img src="/img/core-img/logo.png" alt=""></a>
                     </div>
 
                     <!-- Login Search Area -->
@@ -142,13 +142,16 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="#">Politics</a></li>
-                            <li><a href="#">Breaking News</a></li>
-                            <li><a href="#">Business</a></li>
-                            <li><a href="#">Technology</a></li>
-                            <li><a href="#">Health</a></li>
-                            <li><a href="#">Travel</a></li>
-                            <li><a href="#">Sports</a></li>
+                            <!-- Categories Start-->
+
+                            <% if(typeof categories != 'undefined'){ %>
+                                <% categories.forEach(category =>{ %>
+                                   <li><a href="/category/<%=category.category_id %>"><%=category.title %></a></li>
+                                <% }); %>
+                             <% } %>
+
+                            <!-- Categories End -->
+
                             <li><a href="/contact">Contact</a></li>
                         </ul>
                     </div>

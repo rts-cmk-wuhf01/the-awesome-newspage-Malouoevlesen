@@ -3,31 +3,84 @@ const mySQL = require("../config/mysql");
 module.exports = (app) => {
 
    app.get('/', async (req, res, next) => {
-      res.render('home');
-      db = await mySQL.connect (); // Connects to database.
+      // Connect to the DB and get all the data
+      db = await mySQL.connect (); // Connects to database.      
+      let [categories] = await db.query('SELECT * FROM categories');
+      db.end (); // Disconnects from database.
+
+      res.render('home', { categories:categories }, function (err, html) {
+         res.send(html)
+      })
+
+   });
+   
+
+   app.get('/about', async (req, res, next) => {
+         // Connect to the DB and get all the data
+         db = await mySQL.connect (); // Connects to database.      
+         let [categories] = await db.query('SELECT * FROM categories');
+         db.end (); // Disconnects from database.
+   
+         res.render('about', { categories:categories }, function (err, html) {
+            res.send(html)
+         })
+   });
+
+   app.get('/contact',  async (req, res, next) => {
+         // Connect to the DB and get all the data
+         db = await mySQL.connect (); // Connects to database.      
+         let [categories] = await db.query('SELECT * FROM categories');
+         db.end (); // Disconnects from database.
+   
+         res.render('contact', { categories:categories }, function (err, html) {
+            res.send(html)
+         })
+   });
+
+   app.get('/single-post',  async (req, res, next) => {
+         // Connect to the DB and get all the data
+         db = await mySQL.connect (); // Connects to database.      
+         let [categories] = await db.query('SELECT * FROM categories');
+         db.end (); // Disconnects from database.
+         
+         res.render('single-post', { categories:categories }, function (err, html) {
+         res.send(html)
+         })
+   });
+
+
+   app.get('/categories-post/:category_id', async (req, res, next) => {
+
+      // Connect to the DB and get all the data
+      db = await mySQL.connect (); // Connects to database.      
+      let [categories] = await db.query('SELECT * FROM categories');
+      let [articles] = await db.execute(`
+         SELECT articles.title, articles.text, images.src AS img, articles.id FROM articles 
+         INNER JOIN images ON articles.images_fk=images.id 
+         WHERE articles.category_fk = ?
+      `, [req.params.category_id]);
+      console.log(articles)
 
       db.end (); // Disconnects from database.
-   });
 
-   app.get('/about', (req, res, next) => {
-      res.render('about');
-   });
+      console.log(categories)
 
-   app.get('/contact', (req, res, next) => {
-      res.render('contact');
-   });
-
-   app.get('/categories-post', (req, res, next) => {
       let dateForPost = new Date('2019-04-14 07:00:14');
       let dateForOtherPost = new Date('2019-04-14 11:00:14');
-      res.render('categories-post', { date: dateForPost, dateOther: dateForOtherPost }, function (err, html) {
+      res.render('categories-post', { date: dateForPost, dateOther: dateForOtherPost, categories: categories, articles: articles}, function (err, html) {
          res.send(html)
       })
 
    });
 
-   app.get('/single-post', (req, res, next) => {
-      res.render('single-post');
-   });
+   // Kept for history and nothing more
+   // app.get('/categories-post', async (req, res, next) => {
+   //    let dateForPost = new Date('2019-04-14 07:00:14');
+   //    let dateForOtherPost = new Date('2019-04-14 11:00:14');
+   //    res.render('categories-post', { date: dateForPost, dateOther: dateForOtherPost }, function (err, html) {
+   //       res.send(html)
+   //    })
+
+   // });
 
 };
