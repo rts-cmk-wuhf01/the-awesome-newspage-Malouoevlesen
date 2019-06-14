@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 12, 2019 at 10:46 AM
+-- Generation Time: Jun 14, 2019 at 10:32 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -35,20 +35,19 @@ CREATE TABLE `articles` (
   `text` varchar(3000) NOT NULL,
   `date` date NOT NULL,
   `images_fk` int(11) NOT NULL,
-  `category_fk` int(11) NOT NULL,
-  `comments_fk` int(11) NOT NULL
+  `category_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `articles`
 --
 
-INSERT INTO `articles` (`id`, `title`, `authors_fk`, `text`, `date`, `images_fk`, `category_fk`, `comments_fk`) VALUES
-(2, 'KFC runs out of chicken!', 2, 'No more chicken. UK in serious problems.', '2019-06-10', 2, 7, 1),
-(3, 'Campaign costs more than 2 mil', 4, 'The brexit campaign is estimated to now cost more than 2 million pounds so far.', '2019-06-06', 5, 4, 4),
-(6, 'Russia invades Denmark', 2, 'After the new Chernobly disaster, the russians have now decided to invade Denmark.', '2019-06-12', 3, 5, 1),
-(7, 'Kasper Schmeichel changes club', 2, 'Danish football player has decided to relocate his job and change to a different club. ', '2019-06-06', 1, 1, 3),
-(8, 'Brexit: Government spends £97m', 4, 'According to the Cabinet Office, £65m had been earmarked for consultancy services between April 2018 and April 2019.', '2019-06-10', 5, 2, 4);
+INSERT INTO `articles` (`id`, `title`, `authors_fk`, `text`, `date`, `images_fk`, `category_fk`) VALUES
+(2, 'KFC runs out of chicken!', 2, 'No more chicken. UK in serious problems.', '2019-06-10', 2, 7),
+(3, 'Campaign costs 2 million', 4, 'The brexit campaign is estimated to now cost more than 2 million pounds so far.', '2019-06-06', 5, 4),
+(6, 'Russia invades Denmark', 2, 'After the new Chernobly disaster, the russians have now decided to invade Denmark.', '2019-06-12', 3, 5),
+(7, 'Kasper Schmeichel changes club', 2, 'Danish football player has decided to relocate his job and change to a different club. ', '2019-06-06', 1, 1),
+(8, 'Brexit: 97 Million!', 4, 'According to the Cabinet Office, £65m had been earmarked for consultancy services between April 2018 and April 2019.', '2019-06-10', 5, 2);
 
 -- --------------------------------------------------------
 
@@ -105,18 +104,25 @@ CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `user_fk` int(11) NOT NULL,
   `text` varchar(200) NOT NULL,
-  `date` date NOT NULL
+  `date` date NOT NULL,
+  `article_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`id`, `user_fk`, `text`, `date`) VALUES
-(1, 1, 'oawhidoawdhawodhoawhdoawhdo', '2019-06-20'),
-(2, 1, 'Good work man. ', '2019-06-12'),
-(3, 4, 'Smelly cat, smelly cat... something.', '2019-06-09'),
-(4, 3, 'Do you guys have any cake?', '2019-06-02');
+INSERT INTO `comments` (`id`, `user_fk`, `text`, `date`, `article_fk`) VALUES
+(2, 1, 'Foook', '2019-06-04', 3),
+(5, 1, 'Noooo', '2019-06-10', 2),
+(6, 3, 'Wow...', '2019-06-11', 3),
+(7, 2, 'CRAZY!', '2019-06-12', 6),
+(8, 4, 'Amazing..', '2019-06-14', 7),
+(9, 2, 'So much money.', '2019-06-13', 8),
+(10, 4, 'All the chicken...', '2019-06-12', 2),
+(11, 3, 'Well...', '2019-06-10', 3),
+(12, 2, 'RUSSIA!!', '2019-06-12', 6),
+(13, 1, 'Cool...', '2019-06-11', 7);
 
 -- --------------------------------------------------------
 
@@ -176,8 +182,7 @@ ALTER TABLE `articles`
   ADD PRIMARY KEY (`id`),
   ADD KEY `authors_fk` (`authors_fk`),
   ADD KEY `images_fk` (`images_fk`),
-  ADD KEY `category_fk` (`category_fk`),
-  ADD KEY `comments_fk` (`comments_fk`);
+  ADD KEY `category_fk` (`category_fk`);
 
 --
 -- Indexes for table `authors`
@@ -197,7 +202,8 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_fk` (`user_fk`);
+  ADD KEY `user_fk` (`user_fk`),
+  ADD KEY `article_fk` (`article_fk`);
 
 --
 -- Indexes for table `images`
@@ -238,7 +244,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `images`
@@ -262,8 +268,7 @@ ALTER TABLE `users`
 ALTER TABLE `articles`
   ADD CONSTRAINT `articles_ibfk_1` FOREIGN KEY (`category_fk`) REFERENCES `categories` (`id`),
   ADD CONSTRAINT `articles_ibfk_2` FOREIGN KEY (`authors_fk`) REFERENCES `authors` (`id`),
-  ADD CONSTRAINT `articles_ibfk_3` FOREIGN KEY (`images_fk`) REFERENCES `images` (`id`),
-  ADD CONSTRAINT `articles_ibfk_4` FOREIGN KEY (`comments_fk`) REFERENCES `comments` (`id`);
+  ADD CONSTRAINT `articles_ibfk_3` FOREIGN KEY (`images_fk`) REFERENCES `images` (`id`);
 
 --
 -- Constraints for table `authors`
@@ -275,7 +280,8 @@ ALTER TABLE `authors`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_fk`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_fk`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`article_fk`) REFERENCES `articles` (`id`);
 
 --
 -- Constraints for table `users`

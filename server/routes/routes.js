@@ -55,9 +55,14 @@ module.exports = (app) => {
       db = await mySQL.connect (); // Connects to database.      
       let [categories] = await db.query('SELECT * FROM categories');
       let [articles] = await db.execute(`
-         SELECT articles.title, articles.text, images.src AS img, articles.id FROM articles 
+         SELECT articles.title, articles.text, images.src AS img, articles.id, 
+         (SELECT COUNT(comments.id) 
+         FROM comments 
+         WHERE article_fk = articles.id) AS article_comments
+         FROM articles 
          INNER JOIN images ON articles.images_fk=images.id 
          WHERE articles.category_fk = ?
+
       `, [req.params.category_id]);
       console.log(articles)
 
@@ -73,7 +78,7 @@ module.exports = (app) => {
 
    });
 
-   // Kept for history and nothing more
+   // Kept for notes. 
    // app.get('/categories-post', async (req, res, next) => {
    //    let dateForPost = new Date('2019-04-14 07:00:14');
    //    let dateForOtherPost = new Date('2019-04-14 11:00:14');
