@@ -35,7 +35,14 @@ module.exports = (app) => {
          res.render('contact', { categories:categories }, function (err, html) {
             res.send(html)
          })
+
+         //  tilføjes i routes.js filen f.eks. lige under app.get('/contact') endpoint
+         app.post('/contact', (req, res, next) => {
+         res.send(req.body);
+         });
    });
+
+
 
    app.get('/single-post',  async (req, res, next) => {
          // Connect to the DB and get all the data

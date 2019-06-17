@@ -26,3 +26,24 @@ Udfordringen ligger i at splitte designet op i fornuftige og logiske dele, samt 
 Det vil også være ok at oprette templates for elementer der kun benyttes på en side, da siderne indeholder mange linjer kode... det kan være lettere at vedligeholde hvis siderne brydes op i elementer.
 
 Det kan anbefales at bibeholde den overordnede html struktur på den overordnede `.ejs` template, da strukturene ellers kan blive meget uoverskueligt hvis der blot står en samling includes på siden. 
+
+## Notes for assignment
+
+Using mySQL to make our own database. We have created a database for a news paper website.
+So far we have been putting/creating data into the database. (Example articles, author, topic, comments etc).
+We have then been pulling data out of the database so far.
+
+Monday 17/6 started on new topic. Instead of taking data from the database, we can also put data into it. 
+
+## MySQL Notes:
+
+What is MySQL?
+Database system used on web and a system that runs on a server. Ideal for both small and large applications. Uses standard SQL. 
+Compiles on a number of platforms. 
+
+## Database queries
+
+A query is a question or a request.
+We can query a database for specific information and have a recordset returned.
+
+
