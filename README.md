@@ -46,4 +46,73 @@ Compiles on a number of platforms.
 A query is a question or a request.
 We can query a database for specific information and have a recordset returned.
 
+## Notes for 20/6:
+
+NodeJS + ExpressJS (Server)
+
+Routes handlinger - (Handlinger vi kan bede serveren om at udføre)
+
+- res.send() giver et svar til browseren (client)
+
+- req 
+
+- - params (URL parameter)
+
+- - Eksempel: req.params:category_id
+
+View Engines (EJS) - Arbejder med HTML
+
+- Render: res.render()
+
+- Partials (f.eks. navigations bar som er på flere sider)
+
+- < % % > (Server tags)
+
+- < %= title %> (Udskriver indeholdet af variablen)
+
+- < % if(typeof articles != "undefined") { % > Tjekker om variables articles eksistere
+
+res.render(fil, [data]) (Fil er optional, men du har også for at sende noget data med)
+
+Request - Noget som severen har modtaget 
+
+Test: app.get("/articles/:category_id")
+console.log(req.params.category_id)
+(Vil blive vist i terminalen)
+
+MySQL - database som bruger sproget SQL - Minder mere om menneske sprog
+
+- Eksempel: SELECT * FROM articles
+
+BodyParser (modul)
+
+- req.body.email
+
+- - Kræver name-attribut "email" på form-felter: <input>, <textarea>, <select>
+
+Når vi er i gang med at udskrive f.eks artikler fra en database, så er det kolonne-navnene i databasen, der 
+bestemmer, hvad der skal stå efter "article." (efter punktummet)
+
+articles.forEach (article => {
+	<%= article.article_id %>
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

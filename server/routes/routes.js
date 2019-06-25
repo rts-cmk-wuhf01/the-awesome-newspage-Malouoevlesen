@@ -3,6 +3,7 @@ const mySQL = require("../config/mysql");
 module.exports = (app) => {
 
    // Route - Process of showing a packet of data from one source to a destination. 
+   // Route is also actions. 
 
    // Require, request. 
    app.get('/', async (req, res, next) => {
@@ -25,6 +26,48 @@ module.exports = (app) => {
 
    });
    
+   // For testing:
+
+   /*app.get('/fisk/:antalFisk',  (req, res, next) => {
+
+      let fiskdata = {
+
+         antal : req.params.antalFisk
+
+
+      }
+
+      res.render('fisk', {
+
+         'fiskdata': fiskdata
+   
+   });
+
+   });*/
+   
+
+
+   app.get('/fisk/:antalFisk/:typeFisk',  (req, res, next) => {
+
+      let fiskdata = {
+
+         antal : req.params.antalFisk,
+
+         type : req.params.typeFisk
+
+
+      }
+
+      res.render('fisk', {
+
+         'fiskdata': fiskdata
+   
+   });
+
+   });
+   
+
+
    app.get('/hidden', function (req, res) {
       res.send('hello world')
     })
@@ -92,7 +135,9 @@ module.exports = (app) => {
 
       
 
-      console.log(categories)
+      
+
+      console.log(categories);
 
       let dateForPost = new Date('2019-04-14 07:00:14');
       let dateForOtherPost = new Date('2019-04-14 11:00:14');
