@@ -3,6 +3,10 @@ const express = require('express');
 // opret en express applikation 
 const app = express();
 
+// indlæs express modulet, dette er vores serverprogram
+// const express = require('express');
+// opret en express applikation 
+// const app = express();
 
 
 /* aktiver serverside console.log af side indlæsninger. 

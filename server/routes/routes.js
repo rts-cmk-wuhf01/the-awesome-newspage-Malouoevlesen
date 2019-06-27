@@ -44,27 +44,7 @@ module.exports = (app) => {
    });
 
    });*/
-   
 
-
-   app.get('/fisk/:antalFisk/:typeFisk',  (req, res, next) => {
-
-      let fiskdata = {
-
-         antal : req.params.antalFisk,
-
-         type : req.params.typeFisk
-
-
-      }
-
-      res.render('fisk', {
-
-         'fiskdata': fiskdata
-   
-   });
-
-   });
    
 
 
@@ -101,6 +81,45 @@ module.exports = (app) => {
                });
 
 
+
+
+   app.get('/fisk/:antalFisk/:typeFisk',  (req, res, next) => {
+
+      let fiskdata = {
+
+         antal : req.params.antalFisk,
+
+         type : req.params.typeFisk
+
+
+      }
+
+      res.render('fisk', {
+
+         'fiskdata': fiskdata
+   
+   });
+
+   //testing.
+
+   app.get('/fisk/:antalFisk/:typeFisk',  (req, res, next) => {
+
+      let fiskdata = {
+
+         antal : req.params.antalFisk,
+
+         type : req.params.typeFisk
+
+
+      }
+
+      res.render('fisk', {
+
+         'fiskdata': fiskdata
+   
+   });
+
+   });
 
    app.get('/single-post',  async (req, res, next) => {
          // Connect to the DB and get all the data
